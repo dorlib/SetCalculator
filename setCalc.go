@@ -187,12 +187,17 @@ func Intersection(firstSetList, secondSetList []float64) []float64 {
 
 func Complement(firstSetList, secondSetList []float64) []float64 {
 	var result []float64
-	result = firstSetList
+	var found bool
 	for i := 0; i < len(firstSetList); i++ {
+		found = false
 		for j := 0; j < len(secondSetList); j++ {
 			if firstSetList[i] == secondSetList[j] {
-				result = append(result[:i], result[i+1:]...)
+				found = true
+				break
 			}
+		}
+		if found == false {
+			result = append(result, firstSetList[i])
 		}
 	}
 	return result
@@ -241,7 +246,7 @@ func FinalCheck(res []float64) []float64 {
 	return finalAfterCheck
 }
 
-func IsElementIn(firstSetList []float64, num []float64) bool {
+func IsContainedIn(firstSetList []float64, num []float64) bool {
 	var res bool
 	res = false
 	for i := 0; i < len(firstSetList); i++ {
